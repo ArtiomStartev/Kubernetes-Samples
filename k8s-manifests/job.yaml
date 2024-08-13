@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: MYAPP
+  labels:
+    app: MYAPP
+spec:
+  completions: 5
+  parallelism: 5
+  activeDeadlineSeconds: 20
+  ttlSecondsAfterFinished: 30
+  template:
+    metadata:
+      name: MYAPP
+      labels:
+        app: MYAPP
+    spec:
+      containers:
+      - name: MYAPP
+        image: alpine
+        command: ['echo', 'Hello!']
+      restartPolicy: Never

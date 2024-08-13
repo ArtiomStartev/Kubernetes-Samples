@@ -1,0 +1,21 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: MYAPP
+  labels:
+    app: MYAPP
+spec:
+  schedule: "*/1 * * * *"
+  startingDeadlineSeconds: 30
+  concurrencyPolicy: Allow
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: alpine
+            command: ['echo', 'Hello!']
+          restartPolicy: OnFailure
